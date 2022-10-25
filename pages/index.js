@@ -63,8 +63,24 @@ export default ({ events }) => {
   )
 }
 
-export const getServerSideProps = async () => ({
-  props: {
-    events: await (await fetch(`${process.env.BASE_URL}/api/events`)).json(),
-  },
-})
+export const getServerSideProps = async () => {
+  const url = 'https://crt-scheduler.hasura.app/api/rest/agenda'
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-hasura-admin-secret': process.env.HASURA_SECRET,
+  }
+
+  const { agenda } = await (await fetch(url, { headers })).json()
+
+  return {
+    props: {
+      events: agenda.map(({ id, from, to, paciente }) => ({
+        id,
+        end: to,
+        start: from,
+        title: paciente.nome,
+      })),
+    },
+  }
+}

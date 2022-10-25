@@ -44,8 +44,15 @@ export default ({ pacientes }) => {
   )
 }
 
-export const getServerSideProps = async () => ({
-  props: {
-    pacientes: await (await fetch(`${process.env.BASE_URL}/api/pacientes`)).json(),
-  },
-})
+export const getServerSideProps = async () => {
+  const url = 'https://crt-scheduler.hasura.app/api/rest/pacientes'
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-hasura-admin-secret': process.env.HASURA_SECRET,
+  }
+
+  const { pacientes } = await (await fetch(url, { headers })).json()
+
+  return { props: { pacientes } }
+}
