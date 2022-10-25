@@ -122,13 +122,9 @@ export default ({ pacientes, agenda }) => {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
-  const url = 'http://localhost:3000/api'
-
-  return {
-    props: {
-      pacientes: await (await fetch(`${url}/pacientes`)).json(),
-      agenda: await (await fetch(`${url}/agenda/${params.id}`)).json(),
-    },
-  }
-}
+export const getServerSideProps = async ({ req, params }) => ({
+  props: {
+    pacientes: await (await fetch(`${req.headers.referer}api/pacientes`)).json(),
+    agenda: await (await fetch(`${req.headers.referer}api/agenda/${params.id}`)).json(),
+  },
+})

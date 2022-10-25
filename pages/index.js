@@ -63,8 +63,8 @@ export default ({ events }) => {
   )
 }
 
-export const getServerSideProps = async () => ({
+export const getServerSideProps = async ({ req }) => ({
   props: {
-    events: await (await fetch('http://localhost:3000/api/events')).json(),
+    events: await (await fetch(`${req.headers.referer}api/events`)).json(),
   },
 })
