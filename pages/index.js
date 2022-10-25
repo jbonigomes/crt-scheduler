@@ -63,8 +63,8 @@ export default ({ events }) => {
   )
 }
 
-export const getServerSideProps = async ({ req }) => ({
+export const getServerSideProps = async () => ({
   props: {
-    events: await (await fetch(`${req.headers.referer}api/events`)).json(),
+    events: await (await fetch(`${process.env.BASE_URL}/api/events`)).json(),
   },
 })

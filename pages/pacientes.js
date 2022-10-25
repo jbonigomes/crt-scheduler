@@ -44,8 +44,8 @@ export default ({ pacientes }) => {
   )
 }
 
-export const getServerSideProps = async ({ req }) => ({
+export const getServerSideProps = async () => ({
   props: {
-    pacientes: await (await fetch(`${req.headers.referer}api/pacientes`)).json(),
+    pacientes: await (await fetch(`${process.env.BASE_URL}/api/pacientes`)).json(),
   },
 })
