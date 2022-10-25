@@ -1,26 +1,28 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fc-today-bg-color: #eeeeee;
+  --fc-event-bg-color: #2563eb;
+
+  --fc-button-bg-color: #6b7280;
+  --fc-button-hover-bg-color: #4b5563;
+  --fc-button-active-bg-color: #374151;
+
+  --fc-button-border-color: #6b7280;
+  --fc-button-hover-border-color: #4b5563;
+  --fc-button-active-border-color: #374151;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@media screen and (max-width: 1036px) {
+  .fc-header-toolbar {
+    padding: 0 6px;
   }
-  body {
-    color: white;
-    background: black;
-  }
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled):active:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+  box-shadow: none;
 }
